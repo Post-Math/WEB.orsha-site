@@ -1,0 +1,191 @@
+/*
+  A안 정리용 덮어쓰기 스타일 (2026-11-10)
+  빌드된 CSS·JS는 건드리지 않고, 이 파일에서만 AI 느낌이 나는 요소를 정리합니다.
+  이미지(실크 리본, 책상·책 사진, 과정 카드 이미지)는 그대로 둡니다.
+  되돌리려면 이 파일을 비우면 됩니다.
+*/
+
+/* 1. 섹션 제목 위 작은 라벨("01 생각", "02 지도" …)과 첫 화면 라벨("올가교육 · 초·중·고 국어") 숨기기 */
+p:has(> span.tabular-nums + span.h-px),
+#main-content p.split-fade.pb-8,
+main section:first-of-type p.split-fade.pb-8 {
+  display: none !important;
+}
+/* 라벨이 빠진 자리에 빈 왼쪽 칸이 남지 않도록 */
+.shell.grid:has(> p:first-child > span.tabular-nums + span.h-px) {
+  grid-template-columns: minmax(0, 1fr) !important;
+}
+
+/* 2. 글자·단어가 하나씩 떠오르는 효과와 섹션마다 반복되는 등장 효과 끄기 */
+.split-char,
+.split-fade {
+  opacity: 1 !important;
+  animation: none !important;
+}
+.manifesto-word {
+  opacity: 1 !important;
+  transform: none !important;
+}
+[data-reveal],
+[data-reveal-mask] {
+  opacity: 1 !important;
+  clip-path: none !important;
+  transform: none !important;
+}
+.anim-rise {
+  animation: none !important;
+}
+
+/* 3. (취소) 책 이미지 카드의 격자선은 이미지 영역이라 원래대로 둡니다. 2026-11-10 사용자 요청 */
+
+/* 4. 보라·주황 그라데이션 배너(학습 프로그램, 학습 화면 상단)는 상자 없이 글자로만 */
+.hl:not(.hl-center) {
+  background: none !important;
+  color: var(--fg) !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  border-radius: 0 !important;
+}
+.hl:not(.hl-center)::before,
+.hl:not(.hl-center)::after {
+  display: none !important;
+}
+.hl:not(.hl-center) > span[aria-hidden="true"].rounded-full {
+  display: none !important;
+}
+.hl:not(.hl-center) [class*="text-shadow"] {
+  text-shadow: none !important;
+}
+.hl:not(.hl-center) .text-white\/90,
+.hl:not(.hl-center) .text-white\/80,
+.hl:not(.hl-center) .text-white\/85 {
+  color: var(--fg-muted) !important;
+}
+
+/* 5. 마지막 "오늘의 20분을 시작하세요" 상자: 그라데이션은 이곳 한 군데만.
+   06 원과 같은 계열로 밝은 살구·주황 → 부드러운 레드, 천천히 움직임. 글자는 짙은 색, 버튼은 검은 알약.
+   (참고: 팀장님 기준 사이트 ElevenLabs의 질감 있는 구슬 색감) 상자 안 이미지(질감·등고선)는 그대로 둠 */
+.hl.hl-center {
+  background:
+    radial-gradient(120% 140% at 15% 20%, #fff1e6 0%, rgba(255, 241, 230, 0) 55%),
+    linear-gradient(115deg, #fde2cf 0%, #fbc3a3 30%, #f4977c 62%, #e8665e 85%, #f2a184 100%) !important;
+  background-size: 100% 100%, 220% 220% !important;
+  animation: allga-drift 18s ease-in-out infinite alternate;
+}
+.hl.hl-center > div.text-white {
+  color: #1c1917 !important;
+  text-shadow: none !important;
+}
+.hl.hl-center .text-white\/90 {
+  color: #3a2f2a !important;
+}
+.hl.hl-center a.bg-white {
+  background: #1c1917 !important;
+  color: #fff !important;
+  box-shadow: none !important;
+}
+.hl.hl-center a.bg-white:hover {
+  background: #3a3330 !important;
+}
+.hl.hl-center a.text-white {
+  color: #1c1917 !important;
+}
+.hl.hl-center::after {
+  display: none !important;
+}
+.hl.hl-center::before {
+  background: none !important;
+}
+@keyframes allga-drift {
+  from { background-position: 0% 40%; }
+  to   { background-position: 100% 60%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hl.hl-center { animation: none; }
+}
+
+/* 6. 로고: 글자 로고 "오르샤"(Pretendard). 헤더·푸터 모두 (2026-11-13, 이전: media/allga-ci.svg 이미지) */
+a[aria-label="올가교육 홈"] {
+  display: inline-flex !important;
+  align-items: center;
+  height: 38px;
+  color: #101010 !important;
+  text-decoration: none;
+}
+a[aria-label="올가교육 홈"]::before,
+footer .space-y-5 > span.flex.items-center:first-child::before {
+  content: "오르샤";
+  font-family: "Pretendard Variable", Pretendard, sans-serif;
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+a[aria-label="올가교육 홈"] > * {
+  display: none !important;
+}
+footer .space-y-5 > span.flex.items-center:first-child {
+  display: flex !important;
+  align-items: center;
+  height: 38px;
+}
+footer .space-y-5 > span.flex.items-center:first-child > * {
+  display: none !important;
+}
+
+/* 7. "한 문제만, 지금 풀어 보세요." 한 줄로 (PC·태블릿). 휴대폰에서는 넘치지 않게 줄바꿈 허용 */
+@media (min-width: 768px) {
+  h2.t-h1.max-w-\[14ch\] {
+    max-width: none !important;
+    white-space: nowrap;
+  }
+}
+
+/* 8. 마지막 상자: 등고선·점선·빛 없이 살구 → 레드 그라데이션만 (사용자 선택, 2026-11-10)
+      그라데이션 자체는 5번 규칙 그대로. 등고선 이미지는 숨김(파일은 그대로 있음) */
+.hl.hl-center > img[src*="contour"] {
+  display: none !important;
+}
+
+/* 9. 그리드·여백 정리 (Impeccable layout 점검 결과, 2026-11-10)
+      기준선: 페이지 공통 틀(.shell, 최대 폭 1304px + 좌우 --gutter)의 안쪽 선 */
+
+/* 9-1. 03 다섯 갈래의 길: 옆으로 넘기는 줄의 시작점을 기준선에 맞춤 (넓은 화면에서만 옆으로 넘김) */
+@media (min-width: 1024px) {
+  section[aria-label="다섯 갈래의 학습"] .px-\[var\(--gutter\)\].lg\:w-max {
+    padding-left: calc(max(0px, (100vw - 1304px) / 2) + var(--gutter)) !important;
+  }
+}
+
+/* 9-2. 05 직접 풀어 보기: 가운데 좁은 칸 대신 기준선 폭 전체를 씀 */
+section[aria-label="직접 풀어 보기"] .shell > .max-w-4xl {
+  max-width: none !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+/* 9-3. 섹션 위아래 여백을 한 단계(16vh)로 통일 (14vh, 18vh가 섞여 있던 곳) */
+section[aria-label="직접 풀어 보기"],
+section[aria-label="학습 어휘"] {
+  padding-top: 16vh !important;
+  padding-bottom: 16vh !important;
+}
+
+/* 10. 05 직접 풀어 보기: 질문·보기·안내를 연한 바탕 상자 하나로 묶음 (사용자 선택, 2026-11-10)
+       상자 안에는 선 없음. 보기 버튼은 그림자·테두리 선을 빼고 흰 바탕만 남김(상자 안 상자 방지).
+       정답·오답 표시는 원래대로 배경색·글자색으로 구분됨. 결과 화면은 원래 자체 상자가 있어 제외 */
+section[aria-label="직접 풀어 보기"] .shell > .max-w-4xl > div.anim-rise:not([class*="rounded"]) {
+  background: #f5f3f1;
+  border-radius: 2rem;
+  padding: clamp(28px, 4vw, 56px);
+}
+section[aria-label="직접 풀어 보기"] .shell > .max-w-4xl > div.anim-rise:not([class*="rounded"]) button.rounded-\[1\.25rem\] {
+  box-shadow: none !important;
+  border: 0 !important;
+}
+/* 결과 화면 상자도 같은 바탕·모양으로 맞춤 */
+section[aria-label="직접 풀어 보기"] .shell > .max-w-4xl > div.anim-rise[class*="rounded"] {
+  background: #f5f3f1 !important;
+  box-shadow: none !important;
+  border-radius: 2rem !important;
+}
